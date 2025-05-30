@@ -2,14 +2,20 @@ import type { AppProps } from "next/app";
 import GlobalLayout from "../components/global-layout";
 import SearchableLayout from "@/components/searchable-layout";
 import "@/styles/globals.css";
-export default function App({ Component, pageProps }: AppProps) {
+import { ReactNode } from "react";
+import { NextPage } from "next";
+
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactNode) => ReactNode;
+};
+export default function App({
+  Component,
+  pageProps,
+}: AppProps & { Component: NextPageWithLayout }) {
+  const getLayout = Component.getLayout ?? ((page: ReactNode) => page);
   return (
     <>
-      <GlobalLayout>
-        <SearchableLayout>
-          <Component {...pageProps} />
-        </SearchableLayout>
-      </GlobalLayout>
+      <GlobalLayout>{getLayout(<Component {...pageProps} />)}</GlobalLayout>
     </>
   );
 }
