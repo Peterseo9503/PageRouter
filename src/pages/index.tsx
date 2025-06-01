@@ -10,9 +10,9 @@ import fetchRandomBooks from "@/lib/fetch-randombooks";
 //오직 서버측에서만 실행됨
 
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   //컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터를 불러오는 함수
-
+  console.log("인덱스 페이지");
   //병렬처리 
   const [allBooks, recoBooks] = await Promise.all([
     fetchBooks(), fetchRandomBooks()
@@ -30,8 +30,8 @@ export const getServerSideProps = async () => {
 //InferGetServerSidePropsType 추론해줘서 타입을 만들어주는 ?
 //페이지 컴포넌트보다 먼저 실행됨. 위의 getServerSideProps가
 export default function Home({
-  allBooks,recoBooks
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  allBooks, recoBooks
+}: InferGetServerSidePropsType<typeof getStaticProps>) {
   return (
     <div className={style.container}>
       <section>
