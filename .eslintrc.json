@@ -1,9 +1,15 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript",  "plugin:react-hooks/recommended"],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "plugins": ["prettier"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "warn",
     "jsx-a11y/alt-text": "warn",
-    "@next/next/no-img-element": "warn"
+    "@next/next/no-img-element": "warn",
+    "prettier/prettier": "error"
   },
-  "plugins": ["react-hooks"]
 }
